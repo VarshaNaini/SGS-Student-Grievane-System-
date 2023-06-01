@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+ <title>SGS | Admin Login</title>
+
+ <meta charset="UTF-8">
+
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+ <style>
+
+  body,
+
+  h1,
+
+  h3,
+
+  h4,
+
+  h5,
+
+  h6 {
+
+   font-family: "Lato", sans-serif
+
+  }
+
+  .w3-bar,
+
+  h1,
+
+  button {
+
+   font-family: "Montserrat", sans-serif
+
+  }
+
+  .fa-anchor,
+
+  .fa-coffee {
+
+   font-size: 200px
+
+  }
+
+  *,
+
+  *:before,
+
+  *:after {
+
+   margin: 0;
+
+   padding: 0;
+
+   font-family: inherit;
+
+   box-sizing: border-box;
+
+  }
+
+  #main {
+
+   width: max-content;
+
+   margin: 40px auto;
+
+   font-family: "Segoe UI", sans-serif;
+
+   padding: 25px 28px;
+
+   background: #151414;
+
+   border-radius: 4px;
+
+   border: 1px solid #302d2d;
+
+   animation: popup 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+
+  }
+
+  @keyframes popup {
+
+   0% {
+
+    transform: scale(0.2);
+
+    opacity: 0;
+
+   }
+
+   100% {
+
+    transform: scale(1);
+
+    opacity: 1;
+
+   }
+
+  }
+
+  h2 {
+
+   text-align: center;
+
+   font-size: 28px;
+
+   margin-bottom: 20px;
+
+   font-weight: 400;
+
+   color: #e7e7e7;
+
+  }
+
+  .input-parent {
+
+   display: block;
+
+   margin-bottom: 20px;
+
+  }
+
+  label {
+
+   display: block;
+
+   font-size: 16px;
+
+   margin-bottom: 8px;
+
+   color: #a4a4a4;
+
+  }
+
+  .input-parent input {
+
+   padding: 10px 8px;
+
+   width: 100%;
+
+   font-size: 16px;
+
+   background: #323131;
+
+   border: none;
+
+   color: #c7c7c7;
+
+   border-radius: 4px;
+
+   outline: none;
+
+   transition: all 0.2s ease;
+
+  }
+
+  .input-parent input:hover {
+
+   background: #404040;
+
+  }
+
+  .input-parent input:focus {
+
+   box-shadow: 0px 0px 0px 1px #0087ff;
+
+  }
+
+  button {
+
+   padding: 10px 18px;
+
+   font-size: 15px;
+
+   background: #1a3969;
+
+   width: 100%;
+
+   border: none;
+
+   border-radius: 4px;
+
+   color: #f4f4f4;
+
+   transition: all 0.2s ease;
+
+  }
+
+  button:hover {
+
+   opacity: 0.9;
+
+  }
+
+  button:focus {
+
+   box-shadow: 0px 0px 0px 3px black;
+
+  }
+
+ </style>
+
+</head>
+
+<body>
+
+ <!-- Header -->
+
+ <header class="w3-container w3-red w3-center" style="padding:10px 10px">
+
+  <h1 class="w3-margin w3-jumbo">Login</h1>
+
+  <form  id="main" method="post">
+    {% csrf_token %}
+
+   <h2>Login to your account</h2>
+
+   <div class="input-parent">
+
+    <label for="username">Username</label>
+
+    <input type="text" id="username" name="username">
+
+   </div>
+
+   <div class="input-parent">
+
+    <label for="password">Password</label>
+
+    <input type="password" id="password" name="password">
+
+   </div>
+   {% if messages %}
+<ul class="messages">
+    {% for message in messages %}
+    <div class="container-fluid p-0">
+        <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="True">&times;</span>
+          </button>
+          {{ message }}
+        </div>
+      </div>
+    {% endfor %}
+{% endif %}
+   
+
+   <button type="submit" class="w3-button w3-black w3-padding-large w3-large w3-margin-top" value="Login">Login</button>
+
+   
+
+  </form>
+
+ </header>
+
+ <div class="w3-container w3-black w3-center w3-opacity w3-padding-10">
+
+  <h1 class="w3-margin w3-xlarge">Copyrights @ SGS | ContactUs at +91 90000 00000</h1>
+
+ </div>
+
+ <script>
+
+  // Used to toggle the menu on small screens when clicking on the menu button
+
+  function myFunction() {
+
+   var x = document.getElementById("navDemo");
+
+   if (x.className.indexOf("w3-show") == -1) {
+
+    x.className += " w3-show";
+
+   } else {
+
+    x.className = x.className.replace(" w3-show", "");
+
+   }
+
+  }
+
+ </script>
+
+</body>
+
+</html>

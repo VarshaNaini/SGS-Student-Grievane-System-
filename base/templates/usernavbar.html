@@ -1,0 +1,15 @@
+<h3>Welcome {{ request.user }}</h3>
+
+<div>
+    <a href="{% url 'userdashboard'%}">Dashboard</a>
+</div>
+<div>
+    <a href="{% url 'lodgecomplaint' %}">Lodge Complaint</a>
+</div>
+<div>
+    <a href="{% url 'updatepasswordUser' %}">Update Password</a>
+</div>
+<div>
+<a href="{% url 'logout' %}">Logout</a>
+</div>
+

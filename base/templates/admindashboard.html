@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+
+
+
+<html lang="en">
+
+<head>
+
+ <title>Dashboard</title>
+
+ <meta charset="UTF-8">
+
+ <meta name="viewport" content="width=device-width, initial-scale=1">
+
+ <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+ <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+ <!-- Google Font -->
+
+ <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet" />
+
+ <!-- Stylesheet -->
+
+ <!-- <link rel="stylesheet" href="sample dashboard.css" /> -->
+
+ <style>
+
+ body,
+
+ h1,
+
+ h2,
+
+ h3,
+
+ h4,
+
+ h5 {
+
+ font-family: "Poppins", sans-serif
+
+ }
+
+ body {
+
+ font-size: 16px;
+
+ }
+
+ .w3-half img {
+
+ margin-bottom: -6px;
+
+ margin-top: 16px;
+
+ opacity: 0.8;
+
+ cursor: pointer
+
+ }
+
+ .w3-half img:hover {
+
+ opacity: 1
+
+ }
+
+ * {
+
+ padding: 0;
+
+ margin: 0;
+
+ box-sizing: border-box;
+
+ font-family: "Poppins", sans-serif;
+
+ }
+
+ section {
+
+ height: 100vh;
+
+ width: 100%;
+
+ display: grid;
+
+ place-items: center;
+
+ }
+
+ .row {
+
+ display: flex;
+
+ flex-wrap: wrap;
+
+ }
+
+ .column {
+
+ width: 100%;
+
+ padding: 0 1em 1em 1em;
+
+ text-align: center;
+
+ }
+
+ .card {
+
+ width: 100%;
+
+ height: 100%;
+
+ padding: 2em 1.5em;
+
+ background: linear-gradient(#ffffff 50%, #f44336 50%);
+
+ background-size: 100% 200%;
+
+ background-position: 0 2.5%;
+
+ border-radius: 5px;
+
+ box-shadow: 0 0 35px rgba(0, 0, 0, 0.12);
+
+ cursor: pointer;
+
+ transition: 0.5s;
+
+ }
+
+ h3 {
+
+ font-size: 20px;
+
+ font-weight: 600;
+
+ color: #1f194c;
+
+ margin: 1em 0;
+
+ }
+
+ .logout {
+
+ display: none;
+
+ }
+
+ .authenticated .logout {
+
+ display: block;
+
+ }
+
+ p {
+
+ color: #575a7b;
+
+ font-size: 15px;
+
+ line-height: 1.6;
+
+ letter-spacing: 0.03em;
+
+ }
+
+ .icon-wrapper {
+
+ background-color: #f44336;
+
+ position: relative;
+
+ margin: auto;
+
+ font-size: 30px;
+
+ height: 2.5em;
+
+ width: 2.5em;
+
+ color: #ffffff;
+
+ border-radius: 50%;
+
+ display: grid;
+
+ place-items: center;
+
+ transition: 0.5s;
+
+ }
+
+ .card:hover {
+
+ background-position: 0 100%;
+
+ }
+
+ .card:hover .icon-wrapper {
+
+ background-color: #ffffff;
+
+ color: #f44336;
+
+ }
+
+ .card:hover h3 {
+
+ color: #ffffff;
+
+ }
+
+ .card:hover p {
+
+ color: #f0f0f0;
+
+ }
+
+ @media screen and (min-width: 768px) {
+
+ section {
+
+ padding: 0 2em;
+
+ }
+
+ .column {
+
+ flex: 0 50%;
+
+ max-width: 50%;
+
+ }
+
+ }
+
+ @media screen and (min-width: 992px) {
+
+ section {
+
+ padding: 1em 3em;
+
+ }
+
+ .column {
+
+ flex: 0 0 33.33%;
+
+ max-width: 33.33%;
+
+ }
+
+ }
+
+ </style>
+
+</head>
+
+<body>
+
+ <!-- Sidebar/menu -->
+
+ <nav class="w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding" style="z-index:3;width:300px;font-weight:bold;"
+
+ id="mySidebar"><br>
+
+ <a href="javascript:void(0)" onclick="w3_close()" class="w3-button w3-hide-large w3-display-topleft"
+
+ style="width:100%;font-size:22px">Close Menu</a>
+
+ <div class="w3-container">
+
+ <h1 class="w3-padding-64"><b>SGS</b></h1>
+
+ </div>
+
+ <div class="w3-bar-block">
+
+ <a href="{ % url 'admindashboard' %}" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Dashboard</a>
+
+ <a href="{%url 'admin update password' %}"  onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Update Profile</a>
+
+ <a href="{%url 'logout' %}" class="w3-bar-item w3-button w3-hover-white">Logout</a>
+
+ </div>
+
+ </nav>
+
+ <!-- Top menu on small screens -->
+
+ <header class="w3-container w3-top w3-hide-large w3-red w3-xlarge w3-padding">
+
+ <a href="javascript:void(0)" class="w3-button w3-red w3-margin-right" onclick="w3_open()">☰</a>
+
+ <span>SGS</span>
+
+ </header>
+
+ <!-- Overlay effect when opening sidebar on small screens -->
+
+ <!-- <div class="w3-overlay w3-hide-large" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div> -->
+
+ <!-- !PAGE CONTENT! -->
+
+ <div class="w3-main" style="margin-left:340px;margin-right:40px">
+
+ <!-- Header -->
+
+ <!-- <div class="w3-container" style="margin-top:80px" id="showcase">
+
+ <h1 class="w3-jumbo"><b>Dashboard</b></h1>
+
+ <hr style="width:50px;border:5px solid red" class="w3-round">
+
+ </div> -->
+
+ <div class="w3-container" style="margin-top:80px" id="Dashboard">
+
+ <h1 class="w3-jumbo"><b>Hi, {{request.user}}!</b></h1>
+
+ <h1 class="w3-xxxlarge w3-text-red"><b>Dashboard.</b></h1>
+
+  <hr style="width:50px;border:5px solid red" class="w3-round">
+
+ </div>
+
+ <!-- Packages / Pricing Tables -->
+
+ <!-- <div class="w3-container" id="packages" style="margin-top:40px">
+
+ <h1 class="w3-xxxlarge w3-text-red"><b>Dashboard.</b></h1>
+
+ <hr style="width:50px;border:5px solid red" class="w3-round">
+
+ </div> -->
+ 
+ <!-- <form method="GET" action="{% url 'abc' %}">
+  <input type="text" name="q" placeholder="Search Complaint..."/>
+</form>
+<br> -->
+
+ <div class="w3-row-padding">
+
+ <!-- <div class="w3-half w3-margin-bottom"> -->
+
+ <section>
+
+ <!-- <div class="row">
+
+  <h2 class="section-heading">Dashboard</h2>
+
+  </div> -->
+
+ <div class="column">
+
+  <div class="card">
+
+  <div class="icon-wrapper">
+
+  <i style="font-size:24px" class="fa">&#xf00d;</i>
+
+  <!-- <i class="fas fa-brush"></i> -->
+
+  </div>
+
+  <h3>NOT PROCESSED YET</h3>
+
+  <p>
+ 
+    <a href="{% url 'pending' %}">View Details</a>
+
+   </p>
+  </div>
+
+ </div>
+
+ <div class="column">
+
+  <div class="card">
+
+  <div class="icon-wrapper">
+
+  <i class="fa fa-spinner fa-spin" style="font-size:24px"></i>
+
+  <!-- <i class="fas fa-plug"></i> -->
+
+  </div>
+
+  <h3>INPROCESS</h3>
+
+  <p>
+ 
+    <a href="{% url 'inprocess' %}">View Details</a>
+
+   </p>
+
+  </div>
+
+ </div>
+
+ </section>
+
+ <!-- </div> -->
+
+ <!-- <div class="w3-half"> -->
+
+ <section>
+
+ <div class="column">
+
+  <div class="card">
+
+  <div class="icon-wrapper">
+
+  <i style="font-size:24px" class="fa">&#xf14a;</i>
+
+  <!-- <i class="glyphicon glyphicon-thumbs-up"></i> -->
+
+  </div>
+
+  <h3>CLOSED</h3>
+
+  <p>
+ 
+    <a href="{% url 'closed' %}">View Details</a>
+
+   </p>
+
+  </div>
+
+ </div>
+
+ <!-- <div class="row"> -->
+
+ <div class="column">
+
+  <div class="card">
+
+  <div class="icon-wrapper">
+
+  <i class="fa fa-user icon"></i>
+
+  <!-- <i class="fas fa-hammer"></i> -->
+
+  </div>
+
+  <h3>TOTAL</h3>
+
+  <p>
+ 
+    <a href="{% url 'total' %}">View Details</a>
+
+   </p>
+
+  </div>
+
+ </div>
+
+ </section>
+
+ <!-- </div> -->
+
+ </div>
+
+ <!-- End page content -->
+
+ </div>
+
+ <!-- W3.CSS Container -->
+
+ <div class="w3-light-grey w3-container w3-padding-32" style="margin-top:75px;padding-right:58px">
+
+ <p class="w3-right">Copyrights @ SGS | ContactUs at +91 90000 00000</p>
+
+ </div>
+
+ <script>
+
+ // Script to open and close sidebar
+
+ function w3_open() {
+
+ document.getElementById("mySidebar").style.display = "block";
+
+ document.getElementById("myOverlay").style.display = "block";
+
+ }
+
+ function w3_close() {
+
+ document.getElementById("mySidebar").style.display = "none";
+
+ document.getElementById("myOverlay").style.display = "none";
+
+ }
+
+ // Modal Image Gallery
+
+ function onClick(element) {
+
+ document.getElementById("img01").src = element.src;
+
+ document.getElementById("modal01").style.display = "block";
+
+ var captionText = document.getElementById("caption");
+
+ captionText.innerHTML = element.alt;
+
+ }
+
+ var isAuthenticated = document.cookie.indexOf("authenticated=true") >= 0;
+
+ if (isAuthenticated) {
+
+ document.body.className += " authenticated";
+
+ }
+
+ </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
